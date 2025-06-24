@@ -17,7 +17,7 @@ Plex can become confused about albums, for example seeing 1 album split in 2. Th
 
 The resulting music library might look something like this:
 ```
-pool/parent/music/PCM
+pool/parent/music/FLAC
                      /library
                              /Artist
                                     /Album
@@ -28,7 +28,7 @@ pool/parent/music/DSD
                                     /Album
                                           /Tracks
 ```
-with Plex watching the two library folders.
+with the Plex Music library configured to watch the two library folders.
 
 ## Reminder
 Check that the new dataset is included in scheduled snapshot and backup policies.
