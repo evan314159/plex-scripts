@@ -18,10 +18,10 @@ Plex can become confused about albums, for example seeing 1 album split in 2. Th
 The resulting music library might look something like this:
 ```
 pool/parent/music/FLAC
-                     /library
-                             /Artist
-                                    /Album
-                                          /Tracks
+                      /library
+                              /Artist
+                                     /Album
+                                           /Tracks
 pool/parent/music/DSD
                      /library
                              /Artist
