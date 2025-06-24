@@ -12,7 +12,7 @@ $ ./plex-m3u-to-playlist.py --path-mapping="/Users/user/Music:/media/music" Favo
 ```
 
 ### Category: Plex Hints
-#### plex-hint-zfs-and-dsd-audio.md: Meaningfully compress huge DSD albums using ZFS compression
+#### plex-hint-zfs-and-dsd-audio.md: Meaningfully compress huge DSD albums using ZFS compression.
 
 ## Getting Help
 Scripts print detailed usage instructions when run with argument --help. They will also print brief usage instructions when run with no arguments unless intended to be used in pipes.
