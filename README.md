@@ -4,7 +4,7 @@ Scripts and hints to help with Plex music library management. These scripts are 
 ## Available Scripts and Hints
 
 | Category | Script | Description |
-| -------- | :----- | :---------- |
+| :------- | :----- | :---------- |
 | **Playlists** | [plex-m3u-to-playlist.py](plex-m3u-to-playlist.py) | Automates creating and synchronising a Plex playlist from an M3U file. |
 | **Library** Health | [plex-find-broken-albums.py](plex-find-broken-albums.py) | Automates finding broken albums, including albums with tracks mapped to multiple album IDs (appear split across multiple albums in Plex) and albums combining tracks from different directories (appear to be merged into one album). These can then be corrected by updating metadata and/or [Plex Dancing](https://www.plexopedia.com/plex-media-server/general/plex-dance/). |
 | **Plex Hints** | [plex-hint-zfs-and-dsd-audio.md](plex-hint-zfs-and-dsd-audio.md) | Meaningfully compress huge DSD albums using ZFS compression. |
