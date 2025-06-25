@@ -4,11 +4,18 @@ Scripts and hints to help with Plex maintenance. These scripts are not endorsed 
 ## Available Scripts
 
 ### Category: Playlist Management
-#### plex-m3u-to-playlist.py: Create and synchronize a Plex playlist to an M3U file.
+#### plex-m3u-to-playlist.py: Automates creating and synchronising a Plex playlist to an M3U file.
 Example: Create or synchronise Plex playlist named "Favourites" from the file "Favourites.m3u". Map relative paths (../) in the M3U relative to the current directory. Map local filesystem paths "/Users/user/Music" to container paths "/media/music". The resulting Plex playlist will match the order of the M3U.
 
 ```
 $ ./plex-m3u-to-playlist.py --path-mapping="/Users/user/Music:/media/music" Favourites.m3u
+```
+
+### Category: Plex Music Library Health
+#### plex-find-broken-albums.py: Automates finding broken albums, including albums with tracks mapped to multiple album IDs (appear split across multiple albums in Plex) and albums combining tracks from different directories (appear to be merged into one album). These can then be corrected by updating metadata and/or [Plex Dancing](https://www.plexopedia.com/plex-media-server/general/plex-dance/.
+Example:
+```
+$ ./plex-find-broken-albums.py
 ```
 
 ### Category: Plex Hints
