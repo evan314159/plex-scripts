@@ -35,7 +35,7 @@ def load_plex_data(plex_url, plex_token, music_library_name='Music'):
 
 def find_broken_albums(data):
     """Find broken albums: directories with multiple album IDs and album IDs spanning multiple directories."""
-    broken_album_files = []
+    broken_albums = {}  # directory -> set of album IDs
     
     # Group by directory
     directories = defaultdict(list)
@@ -49,7 +49,7 @@ def find_broken_albums(data):
     for directory, album_ids in directories.items():
         unique_album_ids = set(album_ids)
         if len(unique_album_ids) > 1:
-            broken_album_files.append(directory)
+            broken_albums[directory] = unique_album_ids
     
     # Group by album ID
     albums = defaultdict(list)
@@ -63,21 +63,27 @@ def find_broken_albums(data):
     for album_id, dirs in albums.items():
         unique_dirs = set(dirs)
         if len(unique_dirs) > 1:
-            broken_album_files.extend(unique_dirs)
+            for directory in unique_dirs:
+                if directory in broken_albums:
+                    broken_albums[directory].add(album_id)
+                else:
+                    broken_albums[directory] = {album_id}
     
-    return list(set(broken_album_files))
+    return broken_albums
 
-def print_plex_dance_output(file_paths):
-    """Print file paths in format ready for plex-dance.sh."""
+def print_plex_dance_output(broken_albums):
+    """Print file paths with album IDs in format ready for plex-dance.py."""
     import sys
     
-    if not file_paths:
+    if not broken_albums:
         print("No broken albums found.", file=sys.stderr)
         return
 
-    print(f"Found {len(file_paths)} directories with broken albums:", file=sys.stderr)
-    for file_path in sorted(file_paths):
-        print(file_path)
+    print(f"Found {len(broken_albums)} directories with broken albums:", file=sys.stderr)
+    for directory in sorted(broken_albums.keys()):
+        album_ids = sorted(broken_albums[directory])
+        album_ids_str = ','.join(album_ids)
+        print(f"{directory}\t{album_ids_str}")
 
 def main():
     import argparse
@@ -118,10 +124,10 @@ Examples:
         plex_data = load_plex_data(args.plex_url, args.plex_token, args.music_library)
         print(f"Analyzing {len(plex_data)} track entries for broken albums...", file=sys.stderr)
         
-        broken_album_files = find_broken_albums(plex_data)
+        broken_albums = find_broken_albums(plex_data)
         
-        # Print file paths for plex-dance.sh
-        print_plex_dance_output(broken_album_files)
+        # Print file paths with album IDs for plex-dance.py
+        print_plex_dance_output(broken_albums)
         
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
